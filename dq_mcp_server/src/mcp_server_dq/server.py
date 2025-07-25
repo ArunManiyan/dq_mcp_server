@@ -95,7 +95,8 @@ async def start_dq_rule_recommendation(
     database_name: str, 
     table_name: str, 
     ruleset_name: str, 
-    wait_for_completion: bool = True
+    wait_for_completion: bool = True,
+    role: st
 ) -> str:
     """
     Use this tool to generate data quality rule set if the user is providing only table name as input and asking to generate the DQ rules
@@ -106,6 +107,7 @@ async def start_dq_rule_recommendation(
         table_name: The name of the table to analyze
         ruleset_name: Base name for the ruleset (timestamp will be appended)
         wait_for_completion: Whether to wait for the run to complete
+        role: role that will allow to run glue apis
     
     Returns:
         str: Information about the recommendation run and results if available
@@ -122,7 +124,7 @@ async def start_dq_rule_recommendation(
                     "TableName": table_name
                 }
             },
-            Role='arn:aws:iam::200904063326:role/service-role/AWSGlueServiceRole-crawler',
+            Role=role,
             NumberOfWorkers=4,
             Timeout=60,
             CreatedRulesetName=ruleset_name + "_" + time.strftime("%Y%m%d_%H%M%S")
