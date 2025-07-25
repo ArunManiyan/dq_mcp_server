@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "mcp-server-dq": {
+      "command": "uvx",
+      "args": ["mcp-server-dq"],
+      "env": {
+        "AWS_REGION": "us-east-1"
+      },
+      "disabled": false,
+      "autoApprove": [
+        "add",
+        "get_glue_table_rulesets",
+        "list_dq_evaluation_run_results",
+        "fetch_dq_metrics"
+      ]
+    }
+  }
+}
